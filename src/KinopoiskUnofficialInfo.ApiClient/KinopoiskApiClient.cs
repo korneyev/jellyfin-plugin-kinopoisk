@@ -66,9 +66,9 @@ namespace KinopoiskUnofficialInfo.ApiClient
                     return await _apiClient.VideosAsync(filmId, ct);
                 } catch (ApiException e)
                 {
-                    if (e.StatusCode == 404)
-                        return new VideoResponse();
-                    throw;
+                    _logger.LogError(e.Message);
+
+                    return new VideoResponse();
                 }
             }, cancellationToken);
         }
